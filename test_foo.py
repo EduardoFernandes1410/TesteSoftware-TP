@@ -7,4 +7,4 @@ class FooTest(TestCase):
         obj.bar()
         self.assertEqual(obj._attr, 10)
 
-    
+# some comment   
