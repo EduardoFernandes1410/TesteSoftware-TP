@@ -7,4 +7,8 @@ class FooTest(TestCase):
         obj.bar()
         self.assertEqual(obj._attr, 10)
 
+    def test_run(self):
+        obj = Foo()
+        self.assertEqual(obj.run(), 5)
+        
 # some comment   
