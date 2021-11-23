@@ -9,6 +9,6 @@ class FooTest(TestCase):
 
     def test_run(self):
         obj = Foo()
-        self.assertEqual(obj.run(), 5)
-        
+        self.assertEqual(obj.run(), 4)
+
 # some comment   
