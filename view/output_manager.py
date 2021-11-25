@@ -18,3 +18,7 @@ class OutputManager:
     def print_invalid_option():
         print("Invalid option.")
         sleep(1)
+
+    @staticmethod
+    def print_exiting_msg():
+        pass
