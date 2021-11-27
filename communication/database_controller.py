@@ -31,8 +31,15 @@ class DatabaseController:
 
     
     def validate(self, sale):
-        # checa se as quantitades são possiveis e soma o valor total
-        pass
+        """ checa se as quantidades são possiveis e soma o valor total """
+        total_price = 0
+        for name, quantity in products.items():
+            if(self._products[self._products["name"] == name].quantity.values[0] < quantity):
+                raise Exception("Not enough items in inventory")
+
+            total_price += self._products[self._products["name"] == name].price.values[0]
+
+        return total_price
 
 
     def insert_new_product(self, name, price, quantity):
@@ -59,6 +66,7 @@ class DatabaseController:
                 'quantity': quantity,
                 'price': price
             }, ignore_index=True)
+            update_inventory_quantity(name, -quantity)
 
 
     def read(self, query, table):
@@ -68,5 +76,21 @@ class DatabaseController:
             return self._sales.query(query)
 
 
-    def update_database(self, product, price, quantity):
-        pass
+    def update_inventory_price(self, name, new_price):
+        if(name in self._products.name.values):
+            db_controller._products.loc[db_controller._products["name"] == name, 'price'] = new_price
+        else:
+            raise Exception("Product not found in database")
+
+
+    def update_inventory_quantity(self, name, delta_quantity):
+        if(name in self._products.name.values):
+            db_controller._products.loc[db_controller._products["name"] == name, 'quantity'] += delta_quantity
+            db_controller._products.loc[db_controller._products["name"] == name, 'quantity'] = max(0,  db_controller._products.loc[db_controller._products["name"] == name, 'quantity'][0])
+        else:
+            raise Exception("Product not found in database")
+
+
+    def __del__(self):
+        pd.to_pickle(os.path.join(self._database_path, "products.pkl"))
+        pd.to_pickle(os.path.join(self._database_path, "sales.pkl"))
