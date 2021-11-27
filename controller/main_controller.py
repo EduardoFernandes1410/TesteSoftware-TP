@@ -33,9 +33,8 @@ class MainController:
         elif choice == "exit":
             OutputManager.print_exiting_msg()
             return 
-        
         else:
             OutputManager.print_invalid_option()
-            self.run()
+        self.run()
 
 

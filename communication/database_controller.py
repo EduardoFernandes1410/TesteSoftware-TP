@@ -22,14 +22,11 @@ class DatabaseController:
 
     def create_product_table(self):
         df = pd.DataFrame(columns=['name', 'price', 'quantity'])
-        print(df)
         df.to_pickle(os.path.join(self._database_path, "products.pkl"))
 
 
     def create_sales_table(self):
         df = pd.DataFrame(columns=['timestamp', 'datestring', 'name', 'quantity', 'price'])
-        print(df)
-
         df.to_pickle(os.path.join(self._database_path, "sales.pkl"))
 
     
@@ -89,7 +86,10 @@ class DatabaseController:
     def update_inventory_quantity(self, name, delta_quantity):
         if(name in self._products.name.values):
             self._products.loc[self._products["name"] == name, 'quantity'] += delta_quantity
-            self._products.loc[self._products["name"] == name, 'quantity'] = max(0,  self._products.loc[self._products["name"] == name, 'quantity'][0])
+            self._products.loc[self._products["name"] == name, 'quantity'] = max(
+                0,  
+                self._products.loc[self._products["name"] == name, 'quantity'][0]
+                )
         else:
             raise Exception("Product not found in database")
 
@@ -97,3 +97,11 @@ class DatabaseController:
     def __del__(self):
         self._products.to_pickle(os.path.join(self._database_path, "products.pkl"))
         self._sales.to_pickle(os.path.join(self._database_path, "sales.pkl"))
+
+x = DatabaseController('test_db')
+x.insert_new_product('banana', price=10, quantity=100)
+x.insert_new_product('maca', price=5, quantity=100)
+x.insert_new_product('laranja', price=2, quantity=100)
+print(x._products)
+print(x._sales)
+del x
