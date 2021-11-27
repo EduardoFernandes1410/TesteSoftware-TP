@@ -22,18 +22,21 @@ class DatabaseController:
 
     def create_product_table(self):
         df = pd.DataFrame(columns=['name', 'price', 'quantity'])
+        print(df)
         df.to_pickle(os.path.join(self._database_path, "products.pkl"))
 
 
     def create_sales_table(self):
         df = pd.DataFrame(columns=['timestamp', 'datestring', 'name', 'quantity', 'price'])
+        print(df)
+
         df.to_pickle(os.path.join(self._database_path, "sales.pkl"))
 
     
     def validate(self, sale):
         """ checa se as quantidades são possiveis e soma o valor total """
         total_price = 0
-        for name, quantity in products.items():
+        for name, quantity in self._products.items():
             if(self._products[self._products["name"] == name].quantity.values[0] < quantity):
                 raise Exception("Not enough items in inventory")
 
@@ -66,7 +69,7 @@ class DatabaseController:
                 'quantity': quantity,
                 'price': price
             }, ignore_index=True)
-            update_inventory_quantity(name, -quantity)
+            self.update_inventory_quantity(name, -quantity)
 
 
     def read(self, query, table):
@@ -78,19 +81,19 @@ class DatabaseController:
 
     def update_inventory_price(self, name, new_price):
         if(name in self._products.name.values):
-            db_controller._products.loc[db_controller._products["name"] == name, 'price'] = new_price
+            self._products.loc[self._products["name"] == name, 'price'] = new_price
         else:
             raise Exception("Product not found in database")
 
 
     def update_inventory_quantity(self, name, delta_quantity):
         if(name in self._products.name.values):
-            db_controller._products.loc[db_controller._products["name"] == name, 'quantity'] += delta_quantity
-            db_controller._products.loc[db_controller._products["name"] == name, 'quantity'] = max(0,  db_controller._products.loc[db_controller._products["name"] == name, 'quantity'][0])
+            self._products.loc[self._products["name"] == name, 'quantity'] += delta_quantity
+            self._products.loc[self._products["name"] == name, 'quantity'] = max(0,  self._products.loc[self._products["name"] == name, 'quantity'][0])
         else:
             raise Exception("Product not found in database")
 
 
     def __del__(self):
-        pd.to_pickle(os.path.join(self._database_path, "products.pkl"))
-        pd.to_pickle(os.path.join(self._database_path, "sales.pkl"))
+        self._products.to_pickle(os.path.join(self._database_path, "products.pkl"))
+        self._sales.to_pickle(os.path.join(self._database_path, "sales.pkl"))
