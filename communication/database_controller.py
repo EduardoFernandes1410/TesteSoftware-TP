@@ -94,14 +94,14 @@ class DatabaseController:
             raise Exception("Product not found in database")
 
 
-    def __del__(self):
+    def save_database(self):
         self._products.to_pickle(os.path.join(self._database_path, "products.pkl"))
         self._sales.to_pickle(os.path.join(self._database_path, "sales.pkl"))
 
-x = DatabaseController('test_db')
-x.insert_new_product('banana', price=10, quantity=100)
-x.insert_new_product('maca', price=5, quantity=100)
-x.insert_new_product('laranja', price=2, quantity=100)
-print(x._products)
-print(x._sales)
-del x
+# x = DatabaseController('test_db')
+# x.insert_new_product('banana', price=10, quantity=100)
+# x.insert_new_product('maca', price=5, quantity=100)
+# x.insert_new_product('laranja', price=2, quantity=100)
+# print(x._products)
+# print(x._sales)
+# del x
