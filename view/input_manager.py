@@ -34,7 +34,9 @@ class InputManager:
             return "exit"
     
     def adding_product_data(self):
-        product, qtd = input().split(' ')
+        raw_input = input().split(' ')
+        qtd = int(raw_input[-1])
+        product = ' '.join(raw_input[:-1])
         return product, int(qtd)
 
     def remove_product_data(self):
