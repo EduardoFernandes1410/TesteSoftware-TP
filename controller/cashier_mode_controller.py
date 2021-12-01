@@ -23,7 +23,7 @@ class CashierModeController:
     def open_sale(self):
         OutputManager.print_open_sale_menu(self.sale)
         option = self._input_man.open_sale_options()
-        
+
         if option == "add_product":
             self.add_item()
             
