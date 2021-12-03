@@ -32,6 +32,13 @@ class InputManager:
             return "close_sale"
         elif x == 4:
             return "exit"
+
+    def sale_finished(self):
+        x = int(input())
+        if x == 1:
+            return "ok"
+        elif x == 2:
+            return "nok"
     
     def adding_product_data(self):
         raw_input = input().split(' ')
@@ -42,3 +49,5 @@ class InputManager:
     def remove_product_data(self):
         product = input()
         return product
+
+        

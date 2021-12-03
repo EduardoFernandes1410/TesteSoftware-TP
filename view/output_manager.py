@@ -54,6 +54,12 @@ class OutputManager:
         sleep(1)
 
     @staticmethod
+    def print_sale_total(total):
+        print("Total: R$ %.2f\n" % total)
+        print("(1) Ok | (2) Not ok")
+        print("Choice: ", end='')
+        
+    @staticmethod
     def print_exiting_msg():
         print("Exiting...")
         sleep(1)
@@ -66,4 +72,9 @@ class OutputManager:
     @staticmethod
     def print_msg(msg):
         print(msg)
+        sleep(1)
+
+    @staticmethod
+    def print_not_existent_product():
+        print("Error. Not existent product.")
         sleep(1)

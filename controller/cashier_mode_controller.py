@@ -42,7 +42,11 @@ class CashierModeController:
     def add_item(self):
         OutputManager.print_adding_product()
         product, qtd = self._input_man.adding_product_data()
-        self._sale[product] = qtd
+        if self._db_controller.check_product_existence(product):
+            print("existent")
+            self._sale[product] = qtd
+        else:
+            OutputManager.print_not_existent_product()
         self.open_sale()
 
     def remove_item(self):
@@ -54,13 +58,17 @@ class CashierModeController:
     def finish_sale(self):
         try:
             total_price = self._db_controller.validate(self.sale)
-            print('finished - total ', total_price)
+            OutputManager.print_sale_success(total_price)
+            status = self._input_man.sale_finished()
+            if status == "ok":
+                self.register_sale()
+            return
         except Exception as e:
             OutputManager.print_msg(e)
             return
 
     def register_sale(self):
-        pass
+        self._db_controller.register_sale(self.sale)
 
     @property
     def sale(self):
