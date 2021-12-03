@@ -30,6 +30,10 @@ class ReportModeController:
         elif choice == "sales_highest":
             self.highest_sales_num_days()
             self.run()
+        elif choice == "sales_lowest":
+            self.lowest_sales_num_days()
+            self.run()
+        
         elif choice == "exit":
             OutputManager.print_exiting_msg()
             return
@@ -86,6 +90,10 @@ class ReportModeController:
         highest_sales_num_days = self._highest_sales_num_days_aux(sales_table, 10)
         OutputManager.print_dataframe(highest_sales_num_days)
 
+    def lowest_sales_num_days(self):
+        sales_table = self._db_controller.read(None, "sales")
+        lowest_sales_num_days = self._lowest_sales_num_days_aux(sales_table, 10)
+        OutputManager.print_dataframe(lowest_sales_num_days)
 
     @staticmethod
     def _highest_sales_num_days_aux(table, limit=10):
@@ -95,5 +103,12 @@ class ReportModeController:
         df = df['sales num'].sort_values(ascending=False).head(limit)
         return df
 
-    def export_report(self):
-        pass
+    @staticmethod
+    def _lowest_sales_num_days_aux(table, limit=10):
+        days = table['datestring'].str.slice(0, 10)
+        days, count = np.unique(days, return_counts=True)
+        df = pd.DataFrame({"day": days, "sales num": count}).set_index('day')
+        df = df['sales num'].sort_values(ascending=True).head(limit)
+        return df
+
+    

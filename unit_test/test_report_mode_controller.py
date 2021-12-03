@@ -22,8 +22,18 @@ class TestReportModeController(TestCase):
         self.assertEqual(most_sold_item.index[1], 'abacaxi')
         self.assertEqual(most_sold_item.index[2], 'maca')
 
+    def test_most_sold_items_aux_return_n(self):
+        most_sold_item = ReportModeController._most_sold_items_aux(self.sales, 2)
+        self.assertEqual(len(most_sold_item),2)
+
     def test_highest_sales_num_days(self):
         highest_sales_num_days = ReportModeController._highest_sales_num_days_aux(self.sales)
         self.assertEqual(highest_sales_num_days.index[0], '02/01/2021')
+
+    def test_lowest_sales_num_days(self):
+        lowest_sales_num_days = ReportModeController._lowest_sales_num_days_aux(self.sales)
+        self.assertEqual(lowest_sales_num_days.index[0], '01/01/2021')
+
+    
 
     

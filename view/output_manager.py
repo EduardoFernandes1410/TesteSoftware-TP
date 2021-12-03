@@ -81,7 +81,7 @@ class OutputManager:
         print('2 - Most sold items')
         print('3 - Revenue contributors')
         print('4 - Highest sales')
-        print('5 - Export report')
+        print('5 - Lowest sales')
         print('6 - Exit')
         print("=======================")
         print("Choice: ", end='')
@@ -147,4 +147,3 @@ class OutputManager:
     @staticmethod
     def waiting_key_msg():
         print("Press any key to continue...")
-        input()

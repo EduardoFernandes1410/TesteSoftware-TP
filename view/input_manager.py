@@ -33,7 +33,7 @@ class InputManager:
         elif x == 4:
             return "sales_highest"
         elif x == 5:
-            return "export"
+            return "sales_lowest"
         elif x == 6:
             return "exit"
     
