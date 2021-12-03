@@ -11,7 +11,7 @@ class ManagerModeController:
         OutputManager.print_manager_menu()
         
         try:
-            choice = self._input_man.cashier_options()
+            choice = self._input_man.manager_options()
         except:
             OutputManager.print_invalid_input()
             self.run()
@@ -25,6 +25,9 @@ class ManagerModeController:
             self.remove_item()
         if choice == 'update_inventory':
             self.modify_inventory_qtd()
+        elif choice == "check_inventory":
+            self.check_stock()
+            self.run()
         elif choice == 'exit':
             OutputManager.print_exiting_msg()
             return
@@ -92,3 +95,8 @@ class ManagerModeController:
         except Exception as e:
             OutputManager.not_in_inventory_error()
 
+    def check_stock(self):
+        inventory = self._db_controller.read(None, 'products')
+        OutputManager.print_dataframe(inventory)
+        OutputManager.waiting_key_msg()
+        self._input_man.waiting_any_key()

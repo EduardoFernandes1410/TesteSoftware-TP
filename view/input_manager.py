@@ -85,6 +85,8 @@ class InputManager:
         elif x == 4:
             return "update_inventory"
         elif x == 5:
+            return "check_inventory"
+        elif x == 6:
             return "exit"
         
     def inserting_item_data(self):
@@ -103,4 +105,5 @@ class InputManager:
     def removing_product(self):
         return input()
 
-        
+    def waiting_any_key(self):
+        input()

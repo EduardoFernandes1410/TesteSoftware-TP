@@ -4,7 +4,7 @@ class OutputManager:
 
     @staticmethod
     def print_menu():
-        # os.system('clear')
+        os.system('clear')
         print("=======================")
         print("Welcome\n")
         print('1 - Cashier mode')
@@ -16,7 +16,7 @@ class OutputManager:
 
     @staticmethod
     def print_cashier_menu():
-        # os.system('clear')
+        os.system('clear')
         print("=======================")
         print("Cashier mode\n")
         print('1 - Init sale')
@@ -26,7 +26,7 @@ class OutputManager:
 
     @staticmethod
     def print_open_sale_menu(sale):
-        # os.system('clear')
+        os.system('clear')
         print("=======================")
         print("SALE\n")
         for k,v in sale.items():
@@ -111,14 +111,15 @@ class OutputManager:
         
     @staticmethod
     def print_manager_menu():
-        # os.system('clear')
+        os.system('clear')
         print("=======================")
         print("Manager mode\n")
         print('1 - Register product')
         print('2 - Update price')
         print('3 - Remove product')
         print('4 - Update inventory')
-        print('5 - Exit')
+        print('5 - Check Inventory')
+        print('6 - Exit')
         print("=======================")
         print("Choice: ", end='')
         
@@ -137,3 +138,7 @@ class OutputManager:
     @staticmethod
     def print_modifying_inventory_qtd():
         print("Product name and new quantity: ", end='')
+
+    @staticmethod
+    def waiting_key_msg():
+        print("Press any key to continue...")
