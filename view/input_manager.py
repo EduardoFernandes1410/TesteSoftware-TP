@@ -21,6 +21,21 @@ class InputManager:
             return "open_sale"
         elif x == 2:
             return "exit"
+    
+    def report_options(self):
+        x = int(input())
+        if x == 1:
+            return "sales_period"
+        elif x == 2:
+            return "sold"
+        elif x == 3:
+            return "revenue"
+        elif x == 4:
+            return "sales_highest"
+        elif x == 5:
+            return "export"
+        elif x == 6:
+            return "exit"
 
     def open_sale_options(self):
         x = int(input())

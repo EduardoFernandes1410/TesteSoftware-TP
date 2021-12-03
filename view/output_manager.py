@@ -70,6 +70,23 @@ class OutputManager:
         sleep(1)
 
     @staticmethod
+    def print_report_menu():
+        print("=======================")
+        print("Report mode\n")
+        print('1 - Sales on period')
+        print('2 - Most sold items')
+        print('3 - Revenue contributors')
+        print('4 - Highest sales')
+        print('5 - Export report')
+        print('6 - Exit')
+        print("=======================")
+        print("Choice: ", end='')
+    
+    @staticmethod
+    def print_sales_period(limit):
+        print("Enter period {} date in y-m-d format: ".format(limit), end='')
+
+    @staticmethod
     def print_msg(msg):
         print(msg)
         sleep(1)
