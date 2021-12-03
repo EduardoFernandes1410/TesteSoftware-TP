@@ -12,7 +12,7 @@ class CashierModeController:
         try:
             choice = self._input_man.cashier_options()
         except:
-            OutputManager.print_invalid_input()
+            OutputManager.print_invalid_option()
             self.run()
             return
 
@@ -27,7 +27,12 @@ class CashierModeController:
 
     def open_sale(self):
         OutputManager.print_open_sale_menu(self.sale)
-        option = self._input_man.open_sale_options()
+        try:
+            option = self._input_man.open_sale_options()
+        except:
+            OutputManager.print_invalid_option()
+            self.open_sale()
+            return
 
         if option == "add_product":
             self.add_item()

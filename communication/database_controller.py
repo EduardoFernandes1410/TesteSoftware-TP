@@ -54,6 +54,7 @@ class DatabaseController:
         return self.get_product_quantity_aux(name, self._products)
 
 
+    @staticmethod
     def get_product_price_aux(name, table):
         if(not DatabaseController.check_product_existence_aux(name, table)):
             raise Exception("Item not found")
@@ -130,21 +131,10 @@ class DatabaseController:
         self._products.loc[self._products["name"] == name, 'quantity'] += delta_quantity
         self._products.loc[self._products["name"] == name, 'quantity'] = max(
             0,  
-            self._products.loc[self._products["name"] == name, 'quantity'][0]
+            self._products.loc[self._products["name"] == name, 'quantity'].values[0]
         )
 
 
     def save_database(self):
         self._products.to_pickle(os.path.join(self._database_path, "products.pkl"))
         self._sales.to_pickle(os.path.join(self._database_path, "sales.pkl"))
-
-
-
-
-# x = DatabaseController('test_db')
-# x.insert_new_product('banana', price=10, quantity=100)
-# x.insert_new_product('maca', price=5, quantity=100)
-# x.insert_new_product('laranja', price=2, quantity=100)
-# print(x._products)
-# print(x._sales)
-# del x
