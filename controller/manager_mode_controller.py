@@ -32,7 +32,7 @@ class ManagerModeController:
             OutputManager.print_invalid_option()
             self.run()
 
-    def insert_item(self, name, price, quantity):
+    def insert_item(self):
         OutputManager.print_inserting_item()
         name, quantity, price = self._input_man.inserting_item_data()
         try:
