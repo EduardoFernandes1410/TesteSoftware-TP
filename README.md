@@ -22,6 +22,6 @@ Neste modo, o usuário pode gerar diversos relatórios sobre todos os dados do s
 ## Tecnologias Utilizadas
 - Linguagem de programação: Python3
 - Framework de teste: unittest
-- Framework de mock: MagicMock - este framework é utilizado para gerar "mocks" das classes do sistema, a fim de facilitar a criação de testes de unidade. Dessa forma, é possível garantir de todos os testes não terão dependências externas e são determinísticos.
+- Ferramenta de mock: MagicMock - este framework é utilizado para gerar "mocks" das classes do sistema, a fim de facilitar a criação de testes de unidade. Dessa forma, é possível garantir de todos os testes não terão dependências externas e são determinísticos.
 - Banco de dados: Pandas - todas as informações do sistema ficam armazenadas em dois Panda DataFrames, que ficam salvos em arquivos "pickle" na máquina do usuário. Ao iniciar o programa, estes arquivos são lidos e os DataFrames reconstruídos. Ao encerrá-lo, os arquivos são atualizados com as novas informações dos DataFrames.
 - Automatização dos testes: GitHub Actions - ao realizar cada "commit" no GitHub, uma nova "build" é construída e todos os testes do sistema são executados automaticamente. Dessa forma, caso o "commit" leve a uma regressão no sistema, a "build" irá falhar e o desenvolvedor será avisado, impedindo que "bugs" cheguem ao usuário final.
