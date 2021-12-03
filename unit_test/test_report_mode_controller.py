@@ -7,11 +7,11 @@ class TestReportModeController(TestCase):
     def setUp(self):
         self.sales = pd.DataFrame(
             data = [
-                [1, '01/01/2021 00:00:00', 'batata', 5, 1.0],
-                [2, '01/01/2021 00:00:00', 'laranja', 10, 2.0],
-                [3, '02/01/2021 00:00:00', 'maca', 15, 3.0],
-                [4, '02/01/2021 00:00:00', 'abacaxi', 20, 4.0],
-                [5, '02/01/2021 00:00:00', 'melancia', 25, 5.0],
+                [1609470000.0, '01/01/2021 00:00:00', 'batata', 5, 1.0],
+                [1609470000.0, '01/01/2021 00:00:00', 'laranja', 10, 2.0],
+                [1609556400.0, '02/01/2021 00:00:00', 'maca', 15, 3.0],
+                [1609556400.0, '02/01/2021 00:00:00', 'abacaxi', 20, 4.0],
+                [1609556400.0, '02/01/2021 00:00:00', 'melancia', 25, 5.0],
                 ],
             columns=['timestamp', 'datestring', 'name', 'quantity', 'price']
         )
@@ -22,19 +22,23 @@ class TestReportModeController(TestCase):
         items = ['melancia', 'abacaxi', 'maca', 'laranja', 'batata']
         self.assertEqual(list(most_sold_item.index), items)
 
+
     def test_most_sold_items_with_limit(self):
         most_sold_item = ReportModeController._most_sold_items_aux(self.sales, 2)
         self.assertEqual(most_sold_item.index[0], 'melancia')
         self.assertEqual(most_sold_item.index[1], 'abacaxi')
         self.assertEqual(len(most_sold_item),2)
 
+
     def test_highest_sales_num_days(self):
         highest_sales_num_days = ReportModeController._highest_sales_num_days_aux(self.sales)
         self.assertEqual(highest_sales_num_days.index[0], '02/01/2021')
 
+
     def test_lowest_sales_num_days(self):
         lowest_sales_num_days = ReportModeController._lowest_sales_num_days_aux(self.sales)
         self.assertEqual(lowest_sales_num_days.index[0], '01/01/2021')
+
     
     def test_most_revenue_contributor_items(self):
         revenue_contributor = ReportModeController.most_revenue_contributors_items_aux(self.sales, limit=None)
@@ -44,6 +48,7 @@ class TestReportModeController(TestCase):
         self.assertEqual(list(revenue_contributor.index), indexes_ans)
         self.assertEqual(values_received, values_ans)
 
+
     def test_most_revenue_contributor_items_with_limit(self):
         revenue_contributor = ReportModeController.most_revenue_contributors_items_aux(self.sales, limit=2)
         indexes_ans = ['melancia', 'abacaxi']
@@ -51,3 +56,19 @@ class TestReportModeController(TestCase):
         values_received = [x[0] for x in list(revenue_contributor.values)]
         self.assertEqual(list(revenue_contributor.index), indexes_ans)
         self.assertEqual(values_received, values_ans)
+
+
+    def test_sales_on_period_multiple_days(self):
+        start_date = "2021-01-01"
+        end_date = "2021-01-03"
+        sales_on_period = ReportModeController.sales_on_period_aux(self.sales, start_date, end_date)
+        names = ['batata', 'laranja', 'maca', 'abacaxi', 'melancia']
+        self.assertEqual(list(sales_on_period["name"].values), names)
+
+
+    def test_sales_on_period_same_day(self):
+        start_date = "2021-01-01"
+        end_date = "2021-01-01"
+        sales_on_period = ReportModeController.sales_on_period_aux(self.sales, start_date, end_date)
+        names = ['batata', 'laranja']
+        self.assertEqual(list(sales_on_period["name"].values), names)
