@@ -61,9 +61,8 @@ class ManagerModeController:
             name = self._input_man.removing_product()
         except Exception as e:
             OutputManager.print_invalid_input()
-            self.insert_item()
+            self.remove_item()
             return
-        
         try:
             self._db_controller.remove_product(name)
         except Exception as e:
@@ -76,11 +75,11 @@ class ManagerModeController:
             name, price = self._input_man.updating_product_price()
         except Exception as e:
             OutputManager.print_invalid_input()
-            self.insert_item()
+            self.update_price()
             return
         
         try:
-            self._db_controller.update_price(name, price)
+            self._db_controller.update_inventory_price(name, price)
         except Exception as e:
             OutputManager.not_in_inventory_error()
 
@@ -91,7 +90,7 @@ class ManagerModeController:
             name, delta_quantity = self._input_man.adding_product_data()
         except Exception as e:
             OutputManager.print_invalid_input()
-            self.insert_item()
+            self.modify_inventory_qtd()
             return
         
         try:

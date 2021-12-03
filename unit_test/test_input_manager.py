@@ -112,3 +112,11 @@ class TestInputManager(TestCase):
     def test_manager_options(self, mock_input):
         mock_input.return_value = "3"
         self.assertEqual(self.input_manager.manager_options(), "remove_product")
+
+    def test_report_output_limit(self, mock_input):
+        mock_input.return_value = "5"
+        self.assertEqual(self.input_manager.report_output_limit(), 5)
+
+    def test_report_output_limit_none(self, mock_input):
+        mock_input.return_value = None
+        self.assertEqual(self.input_manager.report_output_limit(), None)
