@@ -55,8 +55,10 @@ class ManagerModeController:
             OutputManager.not_in_inventory_error()
 
     def modify_inventory_qtd(self, name, qtd):
+        name, delta_quantity = self._input_man.adding_product_data()
+        OutputManager.print_updating_price()
         try:
-            self.db_controller.reload_inventory()
+            self.db_controller.update_inventory_quantity(name, delta_quantity)
         except Exception as e:
             OutputManager.not_in_inventory_error()
 

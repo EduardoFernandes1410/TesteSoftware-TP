@@ -125,3 +125,7 @@ class OutputManager:
     @staticmethod
     def print_updating_price():
         print("Product name and new price: ", end='')
+        
+    @staticmethod
+    def print_modifying_inventory_qtd():
+        print("Product name and new quantity: ", end='')
