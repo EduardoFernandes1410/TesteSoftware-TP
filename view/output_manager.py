@@ -85,6 +85,10 @@ class OutputManager:
     @staticmethod
     def print_sales_period(limit):
         print("Enter period {} date in y-m-d format: ".format(limit), end='')
+    
+    @staticmethod
+    def print_dataframe(df):
+        df.to_markdown()
 
     @staticmethod
     def print_msg(msg):

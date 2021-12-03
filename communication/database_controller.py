@@ -67,6 +67,7 @@ class DatabaseController:
         return self.get_product_price_aux(name, self._products)
 
     
+    @staticmethod
     def validate_sale_aux(sale, table):
         """ checa se as quantidades são possiveis e soma o valor total """
         total_price = 0
@@ -80,7 +81,7 @@ class DatabaseController:
 
 
     def validate_sale(self, sale):
-        return self.validate(sale, self._products)
+        return self.validate_sale_aux(sale, self._products)
 
 
     def insert_new_product(self, name, price, quantity):
@@ -138,3 +139,7 @@ class DatabaseController:
     def save_database(self):
         self._products.to_pickle(os.path.join(self._database_path, "products.pkl"))
         self._sales.to_pickle(os.path.join(self._database_path, "sales.pkl"))
+
+    def remove_product(self, name):
+        self._products = self._products[self._products["name"] != name]
+        

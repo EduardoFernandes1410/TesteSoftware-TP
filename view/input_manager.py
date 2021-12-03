@@ -36,6 +36,9 @@ class InputManager:
             return "export"
         elif x == 6:
             return "exit"
+    
+    def report_period_date(self):
+        return input()
 
     def open_sale_options(self):
         x = int(input())
