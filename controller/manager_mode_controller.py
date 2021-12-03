@@ -47,6 +47,8 @@ class ManagerModeController:
             OutputManager.not_in_inventory_error()
 
     def update_price(self, name, price):
+        OutputManager.print_updating_price()
+        name, price = self._input_man.updating_product_price()
         try:
             self.db_controller.update_price(name, price)
         except Exception as e:

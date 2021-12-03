@@ -84,5 +84,11 @@ class InputManager:
         qtd = int(raw_input[-2])
         price = float(raw_input[-1])
         return name, qtd, price
+    
+    def updating_product_price(self):
+        raw_input = input().split(' ')
+        price = int(raw_input[-1])
+        product = ' '.join(raw_input[:-1])
+        return product, price
 
         
