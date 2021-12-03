@@ -12,7 +12,12 @@ class MainController:
 
     def run(self):
         OutputManager.print_menu()
-        choice = self._input_man.mode()
+        try:
+            choice = self._input_man.mode()
+        except:
+            OutputManager.print_invalid_input()
+            self.run()
+            return
 
         options = {
             'cashier': CashierModeController,

@@ -95,3 +95,8 @@ class OutputManager:
     def print_not_existent_product():
         print("Error. Not existent product.")
         sleep(1)
+
+    @staticmethod
+    def print_invalid_input():
+        print("Fail. Input invalid.")
+        sleep(1)

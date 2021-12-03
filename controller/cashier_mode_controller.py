@@ -9,7 +9,12 @@ class CashierModeController:
 
     def run(self):
         OutputManager.print_cashier_menu()
-        choice = self._input_man.cashier_options()
+        try:
+            choice = self._input_man.cashier_options()
+        except:
+            OutputManager.print_invalid_input()
+            self.run()
+            return
 
         if choice == 'open_sale':
             self.open_sale()
