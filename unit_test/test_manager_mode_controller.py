@@ -8,6 +8,20 @@ class TestManagerModeController(TestCase):
         self.input_man = MagicMock()  
         self.db_cont = MagicMock()
 
+    def test_insert_item(self):
+        self.input_man.inserting_item_data.return_value = ('batata doce', 4.49, 12)
+        manager_mode_controller = ManagerModeController(self.input_man, self.db_cont)
+        manager_mode_controller.insert_item()
+        self.db_cont.insert_new_product.assert_called_with('batata doce', 12, 4.49)
+
+    @patch("controller.manager_mode_controller.OutputManager")
+    def test_insert_item_invalid(self, mock_out):
+        self.input_man.inserting_item_data.return_value = ('batata doce', 4.49, 12)
+        manager_mode_controller = ManagerModeController(self.input_man, self.db_cont)
+        self.db_cont.insert_new_product.side_effect = Exception()
+        manager_mode_controller.insert_item()
+        mock_out.print_existent_product.assert_called_once()
+
     # def test_insert_item(self):
     #     self.input_man.open_sale_options.return_value = 'exit'
     #     cashier_mode_controller = CashierModeController(self.input_man, self.db_cont)
@@ -44,3 +58,4 @@ class TestManagerModeController(TestCase):
         self.db_cont.update_inventory_quantity.side_effect = Exception()
         manager_mode_controller.modify_inventory_qtd()
         mock_out.not_in_inventory_error.assert_called_once()
+        
