@@ -15,7 +15,7 @@ class MainController:
         try:
             choice = self._input_man.mode()
         except:
-            OutputManager.print_invalid_input()
+            OutputManager.print_invalid_option()
             self.run()
             return
 
