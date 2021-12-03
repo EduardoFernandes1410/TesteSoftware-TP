@@ -100,3 +100,16 @@ class OutputManager:
     def print_invalid_input():
         print("Fail. Input invalid.")
         sleep(1)
+        
+    @staticmethod
+    def print_manager_menu():
+        # os.system('clear')
+        print("=======================")
+        print("Manager mode\n")
+        print('1 - Register product')
+        print('2 - Update price')
+        print('3 - Remove product')
+        print('4 - Update inventory')
+        print('5 - Exit')
+        print("=======================")
+        print("Choice: ", end='')

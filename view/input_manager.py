@@ -64,5 +64,18 @@ class InputManager:
     def remove_product_data(self):
         product = input()
         return product
+    
+    def manager_options(self):
+        x = int(input())
+        if x == 1:
+            return "register_product"
+        elif x == 2:
+            return "update_price"
+        elif x == 3:
+            return "remove_product"
+        elif x == 4:
+            return "update_inventory"
+        elif x == 5:
+            return "exit"
 
         

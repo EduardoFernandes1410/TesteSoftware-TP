@@ -8,17 +8,29 @@ class ManagerModeController:
         self.input_manager = input_manager
 
     def run(self):
-        """ 
-        cadastrar produto
-            add item e quantidade
-        remover produto
-            remove item e quantidade         
-        recarregar estoque
-        atualizar preco
+        OutputManager.print_manager_menu()
+        
+        try:
+            choice = self._input_man.cashier_options()
+        except:
+            OutputManager.print_invalid_input()
+            self.run()
+            return
 
-        sair
-        """
-        pass
+        if choice == 'register_product':
+            self.insert_item()
+        if choice == 'update_price':
+            self.update_price()
+        if choice == 'remove_product':
+            self.remove_item()
+        if choice == 'update_inventory':
+            self.modify_inventory_qtd()
+        elif choice == 'exit':
+            OutputManager.print_exiting_msg()
+            return
+        else:
+            OutputManager.print_invalid_option()
+            self.run()
 
     def insert_item(self, name, price, quantity):
         try:
