@@ -24,23 +24,25 @@ class TestCashierModeController(TestCase):
 
     
     def test_remove_item_from_sale(self):
+        print('+++++++++++++++++++++++')
         self.input_man.adding_product_data.return_value = 'test-item', 10
-        self.input_man.open_sale_options.side_effect = ['remove_product', 'exit']
+        self.input_man.open_sale_options.side_effect = ['add_product', 'remove_product', 'exit']
         self.input_man.remove_product_data.return_value = 'test-item'
+        self.db_cont.check_product_existence.return_value=True
         cashier_mode_controller = CashierModeController(self.input_man, self.db_cont)
-        cashier_mode_controller.add_item()
+        cashier_mode_controller.open_sale()
         self.assertEqual(cashier_mode_controller.sale, {})
 
     @patch('controller.cashier_mode_controller.OutputManager')
     def test_finish_sale_ok(self, mock_output):
-        self.db_cont.validate.return_value = 15
+        self.db_cont.validate_sale.return_value = 15
         cashier_mode_controller = CashierModeController(self.input_man, self.db_cont)
         cashier_mode_controller.finish_sale()
-        mock_output.print_sale_success.assert_called_with(15)
+        mock_output.print_sale_total.assert_called_with(15)
 
     @patch('controller.cashier_mode_controller.OutputManager')
     def test_finish_sale_nok(self, output_man):
-        self.db_cont.validate.side_effect = Exception()
+        self.db_cont.validate_sale.side_effect = Exception()
         cashier_mode_controller = CashierModeController(self.input_man, self.db_cont)
         cashier_mode_controller.finish_sale()
         output_man.print_msg.assert_called()

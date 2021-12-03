@@ -33,15 +33,17 @@ class CashierModeController:
             OutputManager.print_invalid_option()
             self.open_sale()
             return
-
         if option == "add_product":
             self.add_item()
+            self.open_sale()
             
         elif option == "remove_product":
             self.remove_item()
+            self.open_sale()
 
         elif option == "close_sale":
             self.finish_sale()
+            self.open_sale()
 
         elif option == "exit":
             return
@@ -53,32 +55,28 @@ class CashierModeController:
         OutputManager.print_adding_product()
         product, qtd = self._input_man.adding_product_data()
         if self._db_controller.check_product_existence(product):
-            print("existent")
             self._sale[product] = qtd
         else:
             OutputManager.print_not_existent_product()
-        self.open_sale()
 
     def remove_item(self):
         OutputManager.print_removing_product()
         product = self._input_man.remove_product_data()
         del self._sale[product]
-        self.open_sale()
 
     def finish_sale(self):
         try:
-            total_price = self._db_controller.validate(self.sale)
-            OutputManager.print_sale_success(total_price)
+            total_price = self._db_controller.validate_sale(self.sale)
+            OutputManager.print_sale_total(total_price)
             status = self._input_man.sale_finished()
             if status == "ok":
                 self.register_sale()
-            return
         except Exception as e:
             OutputManager.print_msg(e)
-            return
+        self._sale = dict()
 
     def register_sale(self):
-        self._db_controller.register_sale(self.sale)
+        self._db_controller.register_new_sale(self.sale)
 
     @property
     def sale(self):

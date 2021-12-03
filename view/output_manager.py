@@ -1,10 +1,12 @@
 import os
 from time import sleep
+clear = False
 class OutputManager:
 
     @staticmethod
     def print_menu():
-        os.system('clear')
+        if clear:
+            os.system('clear')
         print("=======================")
         print("Welcome\n")
         print('1 - Cashier mode')
@@ -16,7 +18,8 @@ class OutputManager:
 
     @staticmethod
     def print_cashier_menu():
-        os.system('clear')
+        if clear:
+            os.system('clear')
         print("=======================")
         print("Cashier mode\n")
         print('1 - Init sale')
@@ -26,7 +29,8 @@ class OutputManager:
 
     @staticmethod
     def print_open_sale_menu(sale):
-        os.system('clear')
+        if clear:
+            os.system('clear')
         print("=======================")
         print("SALE\n")
         for k,v in sale.items():
@@ -111,7 +115,8 @@ class OutputManager:
         
     @staticmethod
     def print_manager_menu():
-        os.system('clear')
+        if clear:
+            os.system('clear')
         print("=======================")
         print("Manager mode\n")
         print('1 - Register product')
@@ -142,3 +147,4 @@ class OutputManager:
     @staticmethod
     def waiting_key_msg():
         print("Press any key to continue...")
+        input()

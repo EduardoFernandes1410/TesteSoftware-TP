@@ -19,12 +19,16 @@ class ManagerModeController:
 
         if choice == 'register_product':
             self.insert_item()
+            self.run()
         if choice == 'update_price':
             self.update_price()
+            self.run()
         if choice == 'remove_product':
             self.remove_item()
+            self.run()
         if choice == 'update_inventory':
             self.modify_inventory_qtd()
+            self.run()
         elif choice == "check_inventory":
             self.check_stock()
             self.run()
@@ -81,7 +85,7 @@ class ManagerModeController:
             OutputManager.not_in_inventory_error()
 
     def modify_inventory_qtd(self):
-        OutputManager.print_updating_price()
+        OutputManager.print_modifying_inventory_qtd()
         
         try:
             name, delta_quantity = self._input_man.adding_product_data()
