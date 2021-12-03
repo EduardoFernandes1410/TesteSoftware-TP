@@ -34,7 +34,14 @@ class ManagerModeController:
 
     def insert_item(self):
         OutputManager.print_inserting_item()
-        name, quantity, price = self._input_man.inserting_item_data()
+        
+        try:
+            name, quantity, price = self._input_man.inserting_item_data()
+        except Exception as e:
+            OutputManager.print_invalid_input()
+            self.insert_item()
+            return
+        
         try:
             self._db_controller.insert_new_product(name, price, quantity)
         except Exception as e:
@@ -42,7 +49,14 @@ class ManagerModeController:
 
     def remove_item(self):
         OutputManager.print_removing_product()
-        name = self._input_man.removing_product()
+        
+        try:
+            name = self._input_man.removing_product()
+        except Exception as e:
+            OutputManager.print_invalid_input()
+            self.insert_item()
+            return
+        
         try:
             self._db_controller.remove_product(name)
         except Exception as e:
@@ -50,15 +64,29 @@ class ManagerModeController:
 
     def update_price(self):
         OutputManager.print_updating_price()
-        name, price = self._input_man.updating_product_price()
+        
+        try:
+            name, price = self._input_man.updating_product_price()
+        except Exception as e:
+            OutputManager.print_invalid_input()
+            self.insert_item()
+            return
+        
         try:
             self._db_controller.update_price(name, price)
         except Exception as e:
             OutputManager.not_in_inventory_error()
 
     def modify_inventory_qtd(self):
-        name, delta_quantity = self._input_man.adding_product_data()
         OutputManager.print_updating_price()
+        
+        try:
+            name, delta_quantity = self._input_man.adding_product_data()
+        except Exception as e:
+            OutputManager.print_invalid_input()
+            self.insert_item()
+            return
+        
         try:
             self._db_controller.update_inventory_quantity(name, delta_quantity)
         except Exception as e:
