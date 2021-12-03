@@ -61,6 +61,7 @@ class ReportModeController:
             OutputManager.print_invalid_option()
             self.sales_on_period_aux()
             return
+
         sales = self._db_controller.read("timestamp >= {0} and timestamp <= {1}".format(start_date, end_date), "sales")
         return sales
 
@@ -82,19 +83,20 @@ class ReportModeController:
 
 
     def most_revenue_contributors_items(self):
-        OutputManager.print_dataframe(self.revenue_contributors())
-        OutputManager.waiting_key_msg()
-        self._input_man.waiting_any_key()
-
-    
-    def revenue_contributors(self):
         try:
             OutputManager.print_output_limit()
             limit = self._input_man.report_output_limit()
         except:
             OutputManager.print_invalid_option()
+            return
 
-        sales = self._db_controller.read(None, "sales")
+        OutputManager.print_dataframe(self.most_revenue_contributors_items_aux(sales = self._db_controller.read(None, "sales"), limit = limit))
+        OutputManager.waiting_key_msg()
+        self._input_man.waiting_any_key()
+
+    
+    @staticmethod
+    def most_revenue_contributors_items_aux(sales, limit):
         revenue = pd.DataFrame({"name": sales["name"], "revenue": sales["quantity"] * sales["price"]})
         best_revenues = revenue.groupby("name").sum().sort_values(by="revenue", ascending=False)
 
