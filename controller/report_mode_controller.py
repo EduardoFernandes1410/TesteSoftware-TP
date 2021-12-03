@@ -1,5 +1,6 @@
 from view.output_manager import OutputManager
 from datetime import datetime
+import pandas as pd
 
 class ReportModeController:
     def __init__(self, input_manager, db_controller):
@@ -48,8 +49,21 @@ class ReportModeController:
     def most_sold_items(self, limit=10):
         pass
 
-    def most_revenue_contributors_items(self, limit=10):
-        pass
+    def most_revenue_contributors_items(self):
+        OutputManager.print_dataframe(self.revenue_contributors())
+    
+    def revenue_contributors(self):
+        try:
+            OutputManager.print_output_limit()
+            limit = self._input_man.report_output_limit()
+        except:
+            OutputManager.print_invalid_option()
+        sales = self._db_controller.read(None, "sales")
+        revenue = pd.DataFrame({"name": sales["name"], "revenue": sales["quantity"] * sales["price"]})
+        best_revenues = revenue.groupby("name").sum().sort_values(by="revenue", ascending=False)
+        if limit is None:
+            return best_revenues
+        return best_revenues.head(limit)
 
     def highest_sales_num_days(self, limit=10):
         pass
