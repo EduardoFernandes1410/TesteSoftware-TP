@@ -22,7 +22,7 @@ class TestReportModeController(TestCase):
         items = ['melancia', 'abacaxi', 'maca', 'laranja', 'batata']
         self.assertEqual(list(most_sold_item.index), items)
 
-    def test_most_sold_items_aux_return_n(self):
+    def test_most_sold_items_with_limit(self):
         most_sold_item = ReportModeController._most_sold_items_aux(self.sales, 2)
         self.assertEqual(most_sold_item.index[0], 'melancia')
         self.assertEqual(most_sold_item.index[1], 'abacaxi')
@@ -40,6 +40,14 @@ class TestReportModeController(TestCase):
         revenue_contributor = ReportModeController.most_revenue_contributors_items_aux(self.sales, limit=None)
         indexes_ans = ['melancia', 'abacaxi', 'maca', 'laranja', 'batata']
         values_ans = [125.0, 80.0, 45.0, 20.0, 5.0]
+        values_received = [x[0] for x in list(revenue_contributor.values)]
+        self.assertEqual(list(revenue_contributor.index), indexes_ans)
+        self.assertEqual(values_received, values_ans)
+
+    def test_most_revenue_contributor_items_with_limit(self):
+        revenue_contributor = ReportModeController.most_revenue_contributors_items_aux(self.sales, limit=2)
+        indexes_ans = ['melancia', 'abacaxi']
+        values_ans = [125.0, 80.0]
         values_received = [x[0] for x in list(revenue_contributor.values)]
         self.assertEqual(list(revenue_contributor.index), indexes_ans)
         self.assertEqual(values_received, values_ans)

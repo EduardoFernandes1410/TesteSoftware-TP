@@ -32,6 +32,7 @@ class ReportModeController:
         elif choice == "sales_highest":
             self.highest_sales_num_days()
             self.run()
+            
         elif choice == "sales_lowest":
             self.lowest_sales_num_days()
             self.run()
@@ -117,6 +118,8 @@ class ReportModeController:
         sales_table = self._db_controller.read(None, "sales")
         lowest_sales_num_days = self._lowest_sales_num_days_aux(sales_table, 10)
         OutputManager.print_dataframe(lowest_sales_num_days)
+        OutputManager.waiting_key_msg()
+        self._input_man.waiting_any_key()
 
     @staticmethod
     def _highest_sales_num_days_aux(table, limit=10):
