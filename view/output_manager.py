@@ -87,6 +87,10 @@ class OutputManager:
         print("Enter period {} date in y-m-d format: ".format(limit), end='')
     
     @staticmethod
+    def print_output_limit():
+        print("Enter the number of lines to show (press enter to show all lines): ", end='')
+
+    @staticmethod
     def print_dataframe(df):
         print(df.to_markdown())
 

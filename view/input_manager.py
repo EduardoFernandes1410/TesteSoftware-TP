@@ -39,6 +39,12 @@ class InputManager:
     
     def report_period_date(self):
         return input()
+    
+    def report_output_limit(self):
+        lim = input()
+        if lim:
+            return int(lim)
+        return None
 
     def open_sale_options(self):
         x = int(input())
