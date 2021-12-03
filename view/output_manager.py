@@ -88,7 +88,7 @@ class OutputManager:
     
     @staticmethod
     def print_dataframe(df):
-        df.to_markdown()
+        print(df.to_markdown())
 
     @staticmethod
     def print_msg(msg):
