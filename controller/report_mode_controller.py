@@ -64,9 +64,17 @@ class ReportModeController:
         if limit is None:
             return best_revenues
         return best_revenues.head(limit)
+    @staticmethod
+    def _most_sold_items_aux(table):
+        table_grouped = table.groupby(["name"])
+        table_grouped = table_grouped['quantity'].sum()
+        table_grouped = table_grouped.sort_values(ascending=False)
+        return table_grouped
+        
+    def most_revenue_contributors_items(self, limit=10):
+        pass
 
     def highest_sales_num_days(self, limit=10):
         pass
-
     def export_report(self):
         pass

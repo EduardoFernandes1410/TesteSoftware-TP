@@ -34,6 +34,13 @@ class TestManagerModeController(TestCase):
     def test_modify_inventory_qtd(self):
         self.input_man.adding_product_data.return_value = ('batata doce', 12)
         manager_mode_controller = ManagerModeController(self.input_man, self.db_cont)
-        self.db_cont.update_inventory_quantity.return_value = True
         manager_mode_controller.modify_inventory_qtd()
         self.db_cont.update_inventory_quantity.assert_called_with('batata doce', 12)
+
+    @patch("controller.manager_mode_controller.OutputManager")
+    def test_modify_inventory_qtd_invalid(self, mock_out):
+        self.input_man.adding_product_data.return_value = ('batata doce', 12)
+        manager_mode_controller = ManagerModeController(self.input_man, self.db_cont)
+        self.db_cont.update_inventory_quantity.side_effect = Exception()
+        manager_mode_controller.modify_inventory_qtd()
+        mock_out.not_in_inventory_error.assert_called_once()

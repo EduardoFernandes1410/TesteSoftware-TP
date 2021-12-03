@@ -36,7 +36,7 @@ class ManagerModeController:
         OutputManager.print_inserting_item()
         name, quantity, price = self._input_man.inserting_item_data()
         try:
-            self.db_controller.insert_new_product(name, price, quantity)
+            self._db_controller.insert_new_product(name, price, quantity)
         except Exception as e:
             OutputManager.print_existent_product()
 
@@ -44,7 +44,7 @@ class ManagerModeController:
         OutputManager.print_removing_product()
         name = self._input_man.removing_product()
         try:
-            self.db_controller.remove_product(name)
+            self._db_controller.remove_product(name)
         except Exception as e:
             OutputManager.not_in_inventory_error()
 
@@ -52,7 +52,7 @@ class ManagerModeController:
         OutputManager.print_updating_price()
         name, price = self._input_man.updating_product_price()
         try:
-            self.db_controller.update_price(name, price)
+            self._db_controller.update_price(name, price)
         except Exception as e:
             OutputManager.not_in_inventory_error()
 
@@ -60,9 +60,7 @@ class ManagerModeController:
         name, delta_quantity = self._input_man.adding_product_data()
         OutputManager.print_updating_price()
         try:
-            print('chamou')
-            self.db_controller.update_inventory_quantity(name, delta_quantity)
-            
+            self._db_controller.update_inventory_quantity(name, delta_quantity)
         except Exception as e:
             OutputManager.not_in_inventory_error()
 
