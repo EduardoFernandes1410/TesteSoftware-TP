@@ -36,30 +36,20 @@ class TestManagerModeController(TestCase):
         manager_mode_controller.remove_item()
         mock_out.not_in_inventory_error.assert_called_once()
         
+    def test_update_item(self):
+        self.input_man.updating_product_price.return_value = ('batata doce', 4.49)
+        manager_mode_controller = ManagerModeController(self.input_man, self.db_cont)
+        manager_mode_controller.update_price()
+        self.db_cont.update_price.assert_called_with('batata doce', 4.49)
 
-    # def test_insert_item(self):
-    #     self.input_man.open_sale_options.return_value = 'exit'
-    #     cashier_mode_controller = CashierModeController(self.input_man, self.db_cont)
-    #     cashier_mode_controller.open_sale()
-    #     self.assertEqual(cashier_mode_controller.sale, {})
-
-    
-    # def test_remove_item(self):
-    #     self.input_man.adding_product_data.return_value = 'test-item', 10
-    #     self.input_man.open_sale_options.return_value = 'exit'
-    #     cashier_mode_controller = CashierModeController(self.input_man, self.db_cont)
-    #     cashier_mode_controller.add_item()
-    #     self.assertEqual(cashier_mode_controller.sale, {'test-item': 10})
-
-    
-    # def test_update_price(self):
-    #     self.input_man.adding_product_data.return_value = 'test-item', 10
-    #     self.input_man.open_sale_options.side_effect = ['remove_product', 'exit']
-    #     self.input_man.remove_product_data.return_value = 'test-item'
-    #     cashier_mode_controller = CashierModeController(self.input_man, self.db_cont)
-    #     cashier_mode_controller.add_item()
-    #     self.assertEqual(cashier_mode_controller.sale, {})
-
+    @patch("controller.manager_mode_controller.OutputManager")
+    def test_update_item_invalid(self, mock_out):
+        self.input_man.updating_product_price.return_value = ('batata doce', 4.49)
+        manager_mode_controller = ManagerModeController(self.input_man, self.db_cont)
+        self.db_cont.update_price.side_effect = Exception()
+        manager_mode_controller.update_price()
+        mock_out.not_in_inventory_error.assert_called_once()
+        
     def test_modify_inventory_qtd(self):
         self.input_man.adding_product_data.return_value = ('batata doce', 12)
         manager_mode_controller = ManagerModeController(self.input_man, self.db_cont)
