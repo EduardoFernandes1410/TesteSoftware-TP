@@ -41,8 +41,10 @@ class ManagerModeController:
             OutputManager.print_existent_product()
 
     def remove_item(self, name):
+        OutputManager.print_removing_product()
+        name = self._input_man.removing_product()
         try:
-            self.db_controller.remove_item(name)
+            self.db_controller.remove_product(name)
         except Exception as e:
             OutputManager.not_in_inventory_error()
 

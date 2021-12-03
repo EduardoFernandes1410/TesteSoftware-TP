@@ -93,5 +93,8 @@ class InputManager:
         price = int(raw_input[-1])
         product = ' '.join(raw_input[:-1])
         return product, price
+    
+    def removing_product(self):
+        return input()
 
         
