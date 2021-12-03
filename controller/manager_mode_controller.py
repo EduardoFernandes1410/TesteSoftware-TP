@@ -33,10 +33,12 @@ class ManagerModeController:
             self.run()
 
     def insert_item(self, name, price, quantity):
+        OutputManager.print_inserting_item()
+        name, quantity, price = self._input_man.inserting_item_data()
         try:
-            self.db_controller.insert_new_item(name, price, quantity)
+            self.db_controller.insert_new_product(name, price, quantity)
         except Exception as e:
-            print("cannot insert, already in inventory")
+            OutputManager.print_existent_product()
 
     def remove_item(self, name):
         try:

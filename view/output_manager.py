@@ -113,3 +113,11 @@ class OutputManager:
         print('5 - Exit')
         print("=======================")
         print("Choice: ", end='')
+        
+    @staticmethod
+    def print_inserting_item():
+        print("Item name / quantity / price: ", end='')
+        
+    @staticmethod
+    def print_existent_product():
+        print("Cannot insert, product already in inventory", end='')

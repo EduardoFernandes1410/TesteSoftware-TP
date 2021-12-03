@@ -77,5 +77,12 @@ class InputManager:
             return "update_inventory"
         elif x == 5:
             return "exit"
+        
+    def inserting_item_data(self):
+        raw_input = input().split(' ')
+        name = ' '.join(raw_input[:-2])
+        qtd = int(raw_input[-2])
+        price = float(raw_input[-1])
+        return name, qtd, price
 
         
