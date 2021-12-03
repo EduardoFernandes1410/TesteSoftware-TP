@@ -51,6 +51,7 @@ class ManagerModeController:
         
         try:
             self._db_controller.insert_new_product(name, price, quantity)
+            return 
         except Exception as e:
             OutputManager.print_existent_product()
 

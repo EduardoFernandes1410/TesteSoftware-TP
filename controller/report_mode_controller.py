@@ -47,26 +47,30 @@ class ReportModeController:
 
 
     def sales_on_period(self):
+        OutputManager.print_sales_period("start")
+        start_date = self._input_man.report_period_date()
+        OutputManager.print_sales_period("end")
+        end_date = self._input_man.report_period_date()
+
         try:
-            OutputManager.print_sales_period("start")
-            start_date = self._input_man.report_period_date()
-            OutputManager.print_sales_period("end")
-            end_date = self._input_man.report_period_date()
+            sales_table = self._db_controller.read(None, "sales")
+            information = self.sales_on_period_aux(sales_table, start_date, end_date)
         except:
             OutputManager.print_invalid_option()
-            self.sales_on_period()
             return
 
-        sales_table = self._db_controller.read(None, "sales")
-        OutputManager.print_dataframe(self.sales_on_period_aux(sales_table, start_date, end_date))
+        OutputManager.print_dataframe(information)
         OutputManager.waiting_key_msg()
         self._input_man.waiting_any_key()
 
 
     @staticmethod
     def sales_on_period_aux(table, start_date_string, end_date_string):
-        start_date = datetime.strptime(start_date_string, "%Y-%m-%d").timestamp()
-        end_date = datetime.strptime(end_date_string + " 23:59:59", "%Y-%m-%d %H:%M:%S").timestamp()
+        try:
+            start_date = datetime.strptime(start_date_string, "%Y-%m-%d").timestamp()
+            end_date = datetime.strptime(end_date_string + " 23:59:59", "%Y-%m-%d %H:%M:%S").timestamp()
+        except:
+            raise Exception()
 
         sales = table.query("timestamp >= {0} and timestamp <= {1}".format(start_date, end_date))
         return sales

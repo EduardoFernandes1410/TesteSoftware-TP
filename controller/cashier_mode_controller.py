@@ -53,7 +53,14 @@ class CashierModeController:
 
     def add_item(self):
         OutputManager.print_adding_product()
-        product, qtd = self._input_man.adding_product_data()
+
+        try:
+            product, qtd = self._input_man.adding_product_data()
+        except:
+            OutputManager.print_invalid_option()
+            # self.open_sale()
+            return
+
         if self._db_controller.check_product_existence(product):
             self._sale[product] = qtd
         else:
@@ -73,6 +80,7 @@ class CashierModeController:
                 self.register_sale()
         except Exception as e:
             OutputManager.print_msg(e)
+            
         self._sale = dict()
 
     def register_sale(self):
