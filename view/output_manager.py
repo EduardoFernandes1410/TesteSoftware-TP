@@ -1,6 +1,6 @@
 import os
 from time import sleep
-clear = False
+clear = True
 class OutputManager:
 
     @staticmethod
@@ -75,12 +75,14 @@ class OutputManager:
 
     @staticmethod
     def print_report_menu():
+        if clear:
+            os.system('clear')
         print("=======================")
         print("Report mode\n")
         print('1 - Sales on period')
         print('2 - Most sold items')
         print('3 - Revenue contributors')
-        print('4 - Highest sales')
+        print('4 - Days with highest number of items sold')
         print('5 - Export report')
         print('6 - Exit')
         print("=======================")
@@ -88,7 +90,7 @@ class OutputManager:
     
     @staticmethod
     def print_sales_period(limit):
-        print("Enter period {} date in y-m-d format: ".format(limit), end='')
+        print("Enter period {} date in yyyy-mm-dd format: ".format(limit), end='')
     
     @staticmethod
     def print_output_limit():
@@ -147,4 +149,3 @@ class OutputManager:
     @staticmethod
     def waiting_key_msg():
         print("Press any key to continue...")
-        input()
