@@ -99,3 +99,29 @@ class OutputManager:
     def print_not_existent_product():
         print("Error. Not existent product.")
         sleep(1)
+
+    @staticmethod
+    def print_invalid_input():
+        print("Fail. Input invalid.")
+        sleep(1)
+        
+    @staticmethod
+    def print_manager_menu():
+        # os.system('clear')
+        print("=======================")
+        print("Manager mode\n")
+        print('1 - Register product')
+        print('2 - Update price')
+        print('3 - Remove product')
+        print('4 - Update inventory')
+        print('5 - Exit')
+        print("=======================")
+        print("Choice: ", end='')
+        
+    @staticmethod
+    def print_inserting_item():
+        print("Item name / quantity / price: ", end='')
+        
+    @staticmethod
+    def print_existent_product():
+        print("Cannot insert, product already in inventory", end='')
