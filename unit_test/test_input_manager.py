@@ -40,7 +40,8 @@ class TestInputManager(TestCase):
         self.assertEqual(input_manager.cashier_options(), "open_sale")
 
     
-    def test_choose_exit_sale(self, mock_input):
+    def test_choose_exit_cashier_mode(self, mock_input):
+        print("+"*300)
         mock_input.return_value='2'
         input_manager = InputManager()
         self.assertEqual(input_manager.cashier_options(), "exit")
@@ -89,3 +90,13 @@ class TestInputManager(TestCase):
         mock_input.return_value = "testing"
         input_manager = InputManager()
         self.assertEqual(input_manager.remove_product_data(), "testing")
+
+    def test_sale_finished_ok(self, mock_input):
+        mock_input.return_value = "1"
+        input_manager = InputManager()
+        self.assertEqual(input_manager.sale_finished(), "ok")
+
+    def test_sale_finished_nok(self, mock_input):
+        mock_input.return_value = "2"
+        input_manager = InputManager()
+        self.assertEqual(input_manager.sale_finished(), "nok")
