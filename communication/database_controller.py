@@ -113,9 +113,13 @@ class DatabaseController:
 
     def read(self, query, table):
         if(table == "products"):
-            return self._products.query(query)
+            if query is not None:
+                return self._products.query(query)
+            return self._products
         if(table == "sales"):
-            return self._sales.query(query)
+            if query is not None:
+                return self._sales.query(query)
+            return self._sales
 
 
     def update_inventory_price(self, name, new_price):
@@ -134,7 +138,6 @@ class DatabaseController:
             0,  
             self._products.loc[self._products["name"] == name, 'quantity'].values[0]
         )
-
 
     def save_database(self):
         self._products.to_pickle(os.path.join(self._database_path, "products.pkl"))
