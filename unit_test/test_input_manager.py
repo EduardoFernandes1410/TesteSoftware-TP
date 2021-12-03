@@ -93,6 +93,17 @@ class TestInputManager(TestCase):
         self.assertEqual(name, "pao de batata")
         self.assertEqual(qtd, 5)
         self.assertEqual(price, 1.5)
+        
+    def test_updating_item_data(self, mock_input):
+        mock_input.return_value = "pao de batata 1.5"
+        name, price = self.input_manager.updating_product_price()
+        self.assertEqual(name, "pao de batata")
+        self.assertEqual(price, 1.5)
+        
+    def test_removing_item_data(self, mock_input):
+        mock_input.return_value = "pao de batata"
+        name = self.input_manager.removing_product()
+        self.assertEqual(name, "pao de batata")
 
     def test_report_options(self, mock_input):
         mock_input.return_value = "3"
