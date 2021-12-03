@@ -23,7 +23,7 @@ class TestReportModeController(TestCase):
         self.assertEqual(most_sold_item.index[2], 'maca')
 
     def test_highest_sales_num_days(self):
-        highest_sales_num_days = ReportModeController._highest_sales_num_days(self.sales)
+        highest_sales_num_days = ReportModeController._highest_sales_num_days_aux(self.sales)
         self.assertEqual(highest_sales_num_days.index[0], '02/01/2021')
 
     

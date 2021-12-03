@@ -2,6 +2,7 @@ from view.output_manager import OutputManager
 from datetime import datetime
 import pandas as pd
 import numpy as np
+
 class ReportModeController:
     def __init__(self, input_manager, db_controller):
         self._input_man = input_manager
@@ -17,12 +18,18 @@ class ReportModeController:
             return
         if choice == "sales_period":
             self.sales_on_period()
+            self.run()
         elif choice == "sold":
             self.most_sold_items()
+            self.run()
+
         elif choice == "revenue":
             self.most_revenue_contributors_items()
+            self.run()
+
         elif choice == "sales_highest":
             self.highest_sales_num_days()
+            self.run()
         elif choice == "exit":
             OutputManager.print_exiting_msg()
             return
@@ -75,10 +82,13 @@ class ReportModeController:
         return best_revenues.head(limit)
 
     def highest_sales_num_days(self):
-        pass
+        sales_table = self._db_controller.read(None, "sales")
+        highest_sales_num_days = self._highest_sales_num_days_aux(sales_table, 10)
+        OutputManager.print_dataframe(highest_sales_num_days)
+
 
     @staticmethod
-    def _highest_sales_num_days(table, limit=10):
+    def _highest_sales_num_days_aux(table, limit=10):
         days = table['datestring'].str.slice(0, 10)
         days, count = np.unique(days, return_counts=True)
         df = pd.DataFrame({"day": days, "sales num": count}).set_index('day')
