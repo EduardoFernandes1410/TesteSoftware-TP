@@ -1,7 +1,7 @@
 from view.output_manager import OutputManager
 from datetime import datetime
 import pandas as pd
-
+import numpy as np
 class ReportModeController:
     def __init__(self, input_manager, db_controller):
         self._input_man = input_manager
@@ -46,8 +46,17 @@ class ReportModeController:
         sales = self._db_controller.read("timestamp >= {0} and timestamp <= {1}".format(start_date, end_date), "sales")        
         return sales
 
-    def most_sold_items(self, limit=10):
-        pass
+    def most_sold_items(self):
+        sales_table = self._db_controller.read(None, "sales")
+        most_sold_items = self._most_sold_items_aux(sales_table, 10)
+        OutputManager.print_dataframe(most_sold_items)
+
+    @staticmethod
+    def _most_sold_items_aux(table, limit=10):
+        table_grouped = table.groupby(["name"])
+        table_grouped = table_grouped['quantity'].sum()
+        table_grouped = table_grouped.sort_values(ascending=False)
+        return table_grouped.head(limit)
 
     def most_revenue_contributors_items(self):
         OutputManager.print_dataframe(self.revenue_contributors())
@@ -64,17 +73,17 @@ class ReportModeController:
         if limit is None:
             return best_revenues
         return best_revenues.head(limit)
-    @staticmethod
-    def _most_sold_items_aux(table):
-        table_grouped = table.groupby(["name"])
-        table_grouped = table_grouped['quantity'].sum()
-        table_grouped = table_grouped.sort_values(ascending=False)
-        return table_grouped
-        
-    def most_revenue_contributors_items(self, limit=10):
+
+    def highest_sales_num_days(self):
         pass
 
-    def highest_sales_num_days(self, limit=10):
-        pass
+    @staticmethod
+    def _highest_sales_num_days(table, limit=10):
+        days = table['datestring'].str.slice(0, 10)
+        days, count = np.unique(days, return_counts=True)
+        df = pd.DataFrame({"day": days, "sales num": count}).set_index('day')
+        df = df['sales num'].sort_values(ascending=False).head(limit)
+        return df
+
     def export_report(self):
         pass
