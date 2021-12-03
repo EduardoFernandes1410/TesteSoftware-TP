@@ -30,6 +30,7 @@ class DatabaseController:
         df.to_pickle(os.path.join(self._database_path, "sales.pkl"))
 
 
+    @staticmethod
     def check_product_existence_aux(name, table):
         product = table[table["name"] == name]
         if(len(product) == 0):
@@ -38,7 +39,7 @@ class DatabaseController:
 
 
     def check_product_existence(self, name):
-        return check_product_existence_aux(name, self._products)
+        return DatabaseController.check_product_existence_aux(name, self._products)
 
 
     def get_product_quantity_aux(name, table):
