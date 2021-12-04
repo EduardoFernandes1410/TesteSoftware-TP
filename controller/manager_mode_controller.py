@@ -42,6 +42,8 @@ class ManagerModeController:
         
         try:
             name, quantity, price = self._input_man.inserting_item_data()
+            if quantity < 0 or price < 0:
+                raise Exception("The price and quantity of an item must be non-negative")
         except Exception as e:
             OutputManager.print_invalid_input()
             self.insert_item()
@@ -68,6 +70,8 @@ class ManagerModeController:
         
         try:
             name, price = self._input_man.updating_product_price()
+            if price < 0:
+                raise Exception("The price of an item must be non-negative")
         except Exception as e:
             OutputManager.print_invalid_input()
             self.update_price()

@@ -72,6 +72,11 @@ class OutputManager:
     def not_in_inventory_error():
         print("Fail. Product not in inventory.")
         sleep(1)
+    
+    @staticmethod
+    def not_in_sell_items_error():
+        print("Error: the product is not in the current sell's item list.")
+        sleep(1)
 
     @staticmethod
     def print_report_menu():
