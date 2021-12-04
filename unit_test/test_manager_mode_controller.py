@@ -27,14 +27,6 @@ class TestManagerModeController(TestCase):
         manager_mode_controller = ManagerModeController(self.input_man, self.db_cont)
         manager_mode_controller.remove_item()
         self.db_cont.remove_product.assert_called_with('batata doce')
-
-    @patch("controller.manager_mode_controller.OutputManager")
-    def test_remove_item_invalid(self, mock_out):
-        self.input_man.removing_product.return_value = ('batata doce')
-        manager_mode_controller = ManagerModeController(self.input_man, self.db_cont)
-        self.db_cont.remove_product.side_effect = Exception()
-        manager_mode_controller.remove_item()
-        mock_out.not_in_inventory_error.assert_called_once()
         
     def test_update_item(self):
         self.input_man.updating_product_price.return_value = ('batata doce', 4.49)
