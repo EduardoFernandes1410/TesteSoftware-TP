@@ -55,7 +55,6 @@ class CashierModeController:
             product, qtd = self._input_man.adding_product_data()
         except:
             OutputManager.print_invalid_option()
-            # self.open_sale()
             return
 
         if self._db_controller.check_product_existence(product):
@@ -66,7 +65,10 @@ class CashierModeController:
     def remove_item(self):
         OutputManager.print_removing_product()
         product = self._input_man.remove_product_data()
-        del self._sale[product]
+        try:
+            del self._sale[product]
+        except Exception as e:
+            OutputManager.not_in_sell_items_error()
 
     def finish_sale(self):
         try:
