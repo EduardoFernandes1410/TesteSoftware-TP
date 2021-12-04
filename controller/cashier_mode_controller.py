@@ -53,6 +53,8 @@ class CashierModeController:
 
         try:
             product, qtd = self._input_man.adding_product_data()
+            if qtd < 0:
+                raise Exception("The quantity of an item must be non-negative")
         except:
             OutputManager.print_invalid_option()
             return
