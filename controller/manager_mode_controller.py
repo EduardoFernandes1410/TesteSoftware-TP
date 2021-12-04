@@ -61,10 +61,7 @@ class ManagerModeController:
             OutputManager.print_invalid_input()
             self.remove_item()
             return
-        try:
-            self._db_controller.remove_product(name)
-        except Exception as e:
-            OutputManager.not_in_inventory_error()
+        self._db_controller.remove_product(name)
 
     def update_price(self):
         OutputManager.print_updating_price()
