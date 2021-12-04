@@ -15,9 +15,9 @@ class CashierModeController:
             OutputManager.print_invalid_option()
             self.run()
             return
-
         if choice == 'open_sale':
             self.open_sale()
+            self.run()
         elif choice == 'exit':
             OutputManager.print_exiting_msg()
             return
@@ -36,15 +36,12 @@ class CashierModeController:
         if option == "add_product":
             self.add_item()
             self.open_sale()
-            
         elif option == "remove_product":
             self.remove_item()
             self.open_sale()
-
         elif option == "close_sale":
             self.finish_sale()
             self.open_sale()
-
         elif option == "exit":
             return
         else:

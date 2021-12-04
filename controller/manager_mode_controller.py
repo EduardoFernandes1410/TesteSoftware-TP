@@ -9,24 +9,22 @@ class ManagerModeController:
 
     def run(self):
         OutputManager.print_manager_menu()
-        
         try:
             choice = self._input_man.manager_options()
         except:
             OutputManager.print_invalid_input()
             self.run()
             return
-
         if choice == 'register_product':
             self.insert_item()
             self.run()
-        if choice == 'update_price':
+        elif choice == 'update_price':
             self.update_price()
             self.run()
-        if choice == 'remove_product':
+        elif choice == 'remove_product':
             self.remove_item()
             self.run()
-        if choice == 'update_inventory':
+        elif choice == 'update_inventory':
             self.modify_inventory_qtd()
             self.run()
         elif choice == "check_inventory":
@@ -51,7 +49,6 @@ class ManagerModeController:
         
         try:
             self._db_controller.insert_new_product(name, price, quantity)
-            return 
         except Exception as e:
             OutputManager.print_existent_product()
 
