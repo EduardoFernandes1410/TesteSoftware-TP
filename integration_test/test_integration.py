@@ -38,6 +38,17 @@ class IntegrationTest(TestCase):
         self.assertEqual(len(sales_data), 1)
 
     @patch("builtins.input")
+    def test_insert_and_invalid_sell(self, mock_input):
+        self.db_controller.insert_new_product("batata_doce", 14.50, 10)
+        cashier_controller = CashierModeController(self.input_manager, self.db_controller)
+        mock_input.return_value = "batata_doce 11"
+        cashier_controller.add_item()
+        mock_input.return_value = "1"
+        cashier_controller.finish_sale()
+        sales_data = self.db_controller.read("name == 'batata_doce'", "sales")
+        self.assertEqual(len(sales_data), 0)
+
+    @patch("builtins.input")
     def test_insert_product_make_sale_check_quantity(self, mock_input):
         self.db_controller.insert_new_product("batata", 12.90, 12)
         cashier_controller = CashierModeController(self.input_manager, self.db_controller)
@@ -53,7 +64,11 @@ class IntegrationTest(TestCase):
         self.db_controller.insert_new_product("batata", 12.90, 12)
         df = self.db_controller.read("name == 'batata'", "products")
         self.assertEqual(len(df), 1)
-
+    
+    def test_insert_same_product_twice(self):
+        self.db_controller.insert_new_product("batata", 12.10, 20)
+        with self.assertRaises(Exception) as e:
+            self.db_controller.insert_new_product("batata", 12.10, 20)
 
     def test_insert_and_remove_product(self):
         self.db_controller.insert_new_product("batata", 12.90, 12)
