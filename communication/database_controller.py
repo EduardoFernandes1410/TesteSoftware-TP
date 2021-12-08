@@ -41,7 +41,7 @@ class DatabaseController:
     def check_product_existence(self, name):
         return DatabaseController.check_product_existence_aux(name, self._products)
 
-
+    @staticmethod
     def get_product_quantity_aux(name, table):
         if(not DatabaseController.check_product_existence_aux(name, table)):
             raise Exception("Item not found")
