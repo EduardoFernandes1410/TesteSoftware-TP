@@ -1,3 +1,4 @@
+from contextlib import ExitStack
 from unittest import TestCase
 from unittest.mock import patch, MagicMock
 import pandas as pd
@@ -104,3 +105,9 @@ class IntegrationTest(TestCase):
         cashier_controller.add_item()
         sale = cashier_controller.sale
         self.assertEqual(21, self.db_controller.validate_sale(sale))
+    
+    def test_modify_inexistent_product(self):
+        with self.assertRaises(Exception):
+            self.db_controller.update_inventory_price("batatas", 13.50)
+        with self.assertRaises(Exception):
+            self.db_controller.update_inventory_price("batatas", 20)
