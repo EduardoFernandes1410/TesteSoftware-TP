@@ -25,6 +25,17 @@ class IntegrationTest(TestCase):
         df = self.db_controller.read("name == 'batata'", "products")
         self.assertEqual(len(df), 1)
 
+    @patch("builtins.input")
+    def test_insert_sell_and_remove(self, mock_input):
+        self.db_controller.insert_new_product("batata_doce", 14.50, 20)
+        cashier_controller = CashierModeController(self.input_manager, self.db_controller)
+        mock_input.return_value = "batata_doce 10"
+        cashier_controller.add_item()
+        mock_input.return_value = "1"
+        cashier_controller.finish_sale()
+        self.db_controller.remove_product("batata_doce")
+        sales_data = self.db_controller.read("name == 'batata_doce'", "sales")
+        self.assertEqual(len(sales_data), 1)
 
     @patch("builtins.input")
     def test_insert_product_make_sale_check_quantity(self, mock_input):
