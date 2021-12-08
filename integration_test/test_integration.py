@@ -69,4 +69,4 @@ class IntegrationTest(TestCase):
         mock_input.return_value = "batata 2"
         cashier_controller.add_item()
         sale = cashier_controller.sale
-        self.assertEqual(21, self.db_controller.validate_sale, sale)
+        self.assertEqual(21, self.db_controller.validate_sale(sale))
