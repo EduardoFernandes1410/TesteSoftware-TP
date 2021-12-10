@@ -17,11 +17,12 @@ class SystemTest(TestCase):
 
     def tearDown(self):
         # rmtree(self.temp)
+        shutil.rmtree("system_db")
         pass
 
     def run_test(self, in_file, out_file):
         run_app(
-            'test_db', 
+            'system_db', 
             from_file=True, 
             file_path=os.path.join(self.inputs, in_file), 
             to_file=True, 
@@ -40,7 +41,7 @@ class SystemTest(TestCase):
         self.assertTrue(result)
 
 
-    # def test_add_items_and_read_inventory(self):
-    #     result = self.run_test('2.in', 'test2.out')
-    #     self.assertTrue(result)
+    def test_add_items_and_read_inventory(self):
+        result = self.run_test('2.in', 'test2.out')
+        self.assertTrue(result)
     
