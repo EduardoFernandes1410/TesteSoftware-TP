@@ -19,36 +19,28 @@ class SystemTest(TestCase):
         # rmtree(self.temp)
         pass
 
-    def test_opening_manager_mode_and_exit(self):
+    def run_test(self, in_file, out_file):
         run_app(
             'test_db', 
             from_file=True, 
-            file_path=os.path.join(self.inputs, '1.in'), 
+            file_path=os.path.join(self.inputs, in_file), 
             to_file=True, 
-            outfile_path=os.path.join(self.temp, 'test1.out')
+            outfile_path=os.path.join(self.temp, out_file)
         )
 
         result = filecmp.cmp(
-            os.path.join(self.temp, 'test1.out') , 
-            os.path.join(self.outputs, 'test1.out')
+            os.path.join(self.temp, out_file) , 
+            os.path.join(self.outputs, out_file)
         )
 
+        return result
+
+    def test_opening_manager_mode_and_exit(self):
+        result = self.run_test('1.in', 'test1.out')
         self.assertTrue(result)
 
 
-    # def test_add_items_and_read_inventory2(self):
-    #     run_app(
-    #         'test_db', 
-    #         from_file=True, 
-    #         file_path=os.path.join(self.inputs, '1.in'), 
-    #         to_file=True, 
-    #         outfile_path=os.path.join(self.temp, 'test1.out')
-    #     )
-
-    #     result = filecmp.cmp(
-    #         os.path.join(self.temp, 'test1.out') , 
-    #         os.path.join(self.outputs, 'test1.out')
-    #     )
-
+    # def test_add_items_and_read_inventory(self):
+    #     result = self.run_test('2.in', 'test2.out')
     #     self.assertTrue(result)
     
