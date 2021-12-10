@@ -36,13 +36,14 @@ class SystemTest(TestCase):
         )
 
         return result
+        
 
     def test_opening_manager_mode_and_exit(self):
         result = self.run_test('1.in', 'test1.out')
         self.assertTrue(result)
 
 
-    # def test_add_items_and_read_inventory(self):
-    #     result = self.run_test('2.in', 'test2.out')
-    #     self.assertTrue(result)
+    def test_add_items_and_read_inventory(self):
+        result = self.run_test('2.in', 'test2.out')
+        self.assertTrue(result)
     
