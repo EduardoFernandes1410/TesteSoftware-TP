@@ -2,6 +2,7 @@ import filecmp
 from unittest import TestCase
 from shutil import rmtree
 import sys, os
+import shutil
 
 from main import run_app
 
@@ -41,7 +42,7 @@ class SystemTest(TestCase):
         self.assertTrue(result)
 
 
-    def test_add_items_and_read_inventory(self):
-        result = self.run_test('2.in', 'test2.out')
-        self.assertTrue(result)
+    # def test_add_items_and_read_inventory(self):
+    #     result = self.run_test('2.in', 'test2.out')
+    #     self.assertTrue(result)
     
