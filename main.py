@@ -5,13 +5,17 @@ import argparse
 import sys, os
 
 os.environ['DO_CLEAR'] = "True"
-def run_app(database_name, from_file=False, file_path=None):
+def run_app(database_name, from_file=False, file_path=None, to_file=False, outfile_path=None):
     """
     Runs the application.
     """
     if from_file:
         os.environ['DO_CLEAR'] = "False"
         sys.stdin = open(file_path)
+
+    if to_file:
+        os.environ['DO_CLEAR'] = "False"
+        sys.stdout = open(outfile_path, 'w')
     
     input_man = InputManager()
     db_controller = DatabaseController(database_name)
@@ -27,8 +31,8 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--from_file", help="Usa um arquivo de entrada", action="store_true")
     parser.add_argument("-p", "--file_path", help="Caminho do arquivo de entrada", type=str, default='')
     parser.add_argument("-d", "--database_name", help="Nome do banco de dados", type=str, default='test_db')
-
+    parser.add_argument("-o", "--to_file", help="Usa um arquivo de saída", action="store_true")
+    parser.add_argument("-op", "--outfile_path", help="Caminho do arquivo de saída", type=str, default='')
     args = parser.parse_args()
-
-    run_app(args.database_name, args.from_file, args.file_path)
+    run_app(args.database_name, args.from_file, args.file_path, args.to_file, args.outfile_path)
 
