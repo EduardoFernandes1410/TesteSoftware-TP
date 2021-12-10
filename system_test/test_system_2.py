@@ -50,3 +50,7 @@ class SystemTest(TestCase):
     def test_opening_report_mode_and_list_most_sold_items(self):
         result = self.run_test('3.in', 'test3.out')
         self.assertTrue(result)
+    
+    def test_make_sale_and_check_revenue_contributors(self):
+        result = self.run_test('4.in', 'test4.out')
+        self.assertTrue(result)
