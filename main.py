@@ -3,8 +3,8 @@ from controller.main_controller import MainController
 from view.input_manager import InputManager
 import argparse
 import sys, os
+import settings
 
-os.environ['DO_CLEAR'] = "True"
 def run_app(database_name, from_file=False, file_path=None, to_file=False, outfile_path=None):
     """
     Runs the application.

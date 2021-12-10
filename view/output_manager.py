@@ -1,5 +1,6 @@
 import os
 from time import sleep
+import settings
 class OutputManager:
 
     @staticmethod
