@@ -109,6 +109,8 @@ class ReportModeController:
     @staticmethod
     def most_revenue_contributors_items_aux(sales, limit):
         revenue = pd.DataFrame({"name": sales["name"], "revenue": sales["quantity"] * sales["price"]})
+        if revenue.empty:
+            return revenue
         best_revenues = revenue.groupby("name").sum().sort_values(by="revenue", ascending=False)
 
         if limit is None:
