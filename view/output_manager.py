@@ -1,12 +1,10 @@
 import os
 from time import sleep
-clear = True
 class OutputManager:
 
     @staticmethod
     def print_menu():
-        if clear:
-            OutputManager._clear()
+        OutputManager._clear()
         print("=======================")
         print("Welcome\n")
         print('1 - Cashier mode')
@@ -18,8 +16,7 @@ class OutputManager:
 
     @staticmethod
     def print_cashier_menu():
-        if clear:
-            OutputManager._clear()
+        OutputManager._clear()
         print("=======================")
         print("Cashier mode\n")
         print('1 - Init sale')
@@ -29,8 +26,7 @@ class OutputManager:
 
     @staticmethod
     def print_open_sale_menu(sale):
-        if clear:
-            OutputManager._clear()
+        OutputManager._clear()
         print("=======================")
         print("SALE\n")
         for k,v in sale.items():
@@ -80,8 +76,7 @@ class OutputManager:
 
     @staticmethod
     def print_report_menu():
-        if clear:
-            OutputManager._clear()
+        OutputManager._clear()
         print("=======================")
         print("Report mode\n")
         print('1 - Sales on period')
@@ -122,8 +117,7 @@ class OutputManager:
         
     @staticmethod
     def print_manager_menu():
-        if clear:
-            OutputManager._clear()
+        OutputManager._clear()
         print("=======================")
         print("Manager mode\n")
         print('1 - Register product')
@@ -157,4 +151,6 @@ class OutputManager:
 
     @staticmethod
     def _clear():
-        os.system('cls' if os.name == 'nt' else 'clear')
+        print(os.environ['DO_CLEAR'])
+        if os.environ['DO_CLEAR'] == "True":
+            os.system('cls' if os.name == 'nt' else 'clear')
