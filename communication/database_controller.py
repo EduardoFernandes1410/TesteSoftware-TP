@@ -143,6 +143,7 @@ class DatabaseController:
         self._products.to_pickle(os.path.join(self._database_path, "products.pkl"))
         self._sales.to_pickle(os.path.join(self._database_path, "sales.pkl"))
 
+
     def remove_product(self, name):
         self._products = self._products[self._products["name"] != name]
         
