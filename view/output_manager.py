@@ -151,6 +151,5 @@ class OutputManager:
 
     @staticmethod
     def _clear():
-        print(os.environ['DO_CLEAR'])
         if os.environ['DO_CLEAR'] == "True":
             os.system('cls' if os.name == 'nt' else 'clear')
