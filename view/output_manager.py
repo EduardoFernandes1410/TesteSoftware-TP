@@ -136,7 +136,8 @@ class OutputManager:
         
     @staticmethod
     def print_existent_product():
-        print("Cannot insert, product already in inventory", end='')
+        print("Cannot insert, product already in inventory")
+        sleep(1)
 
     @staticmethod
     def print_updating_price():

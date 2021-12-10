@@ -1,0 +1,15 @@
+=======================
+Manager mode
+
+1 - Register product
+2 - Update price
+3 - Remove product
+4 - Update inventory
+5 - Check Inventory
+6 - Exit
+=======================
+Choice: |    | name    |   price |   quantity |
+|---:|:--------|--------:|-----------:|
+|  0 | Batata  |    10.9 |         20 |
+|  1 | Cenoura |     7.5 |        100 |
+Press any key to continue...

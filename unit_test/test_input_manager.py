@@ -38,7 +38,6 @@ class TestInputManager(TestCase):
 
     
     def test_choose_exit_cashier_mode(self, mock_input):
-        print("+"*300)
         mock_input.return_value='2'
         self.assertEqual(self.input_manager.cashier_options(), "exit")
 

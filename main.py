@@ -25,6 +25,15 @@ def run_app(database_name, from_file=False, file_path=None, to_file=False, outfi
     db_controller.save_database()
 
 
+    if from_file:
+        sys.stdin.close()
+        sys.stdin = sys.__stdin__
+
+    if to_file:
+        sys.stdout.close()
+        sys.stdout = sys.__stdout__
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Sistema da Panificadora Alpha")
 
@@ -34,5 +43,5 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--to_file", help="Usa um arquivo de saída", action="store_true")
     parser.add_argument("-op", "--outfile_path", help="Caminho do arquivo de saída", type=str, default='')
     args = parser.parse_args()
-    run_app(args.database_name, args.from_file, args.file_path, args.to_file, args.outfile_path)
 
+    run_app(args.database_name, args.from_file, args.file_path, args.to_file, args.outfile_path)
