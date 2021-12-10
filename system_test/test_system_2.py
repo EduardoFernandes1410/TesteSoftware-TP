@@ -46,4 +46,7 @@ class SystemTest(TestCase):
     def test_add_items_and_read_inventory(self):
         result = self.run_test('2.in', 'test2.out')
         self.assertTrue(result)
-    
+
+    def test_opening_report_mode_and_list_most_sold_items(self):
+        result = self.run_test('3.in', 'test3.out')
+        self.assertTrue(result)
