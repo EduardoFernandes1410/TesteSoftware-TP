@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - development
+      - main
 
 jobs:
   build:
@@ -21,4 +22,13 @@ jobs:
           python3 -m pip install --upgrade pip
           pip3 install -r requirements.txt
       - name: Run tests with pytest
-        run: python3 -m unittest discover unit_test/
+        run: |
+          python3 -m unittest discover unit_test/
+          bash coverage.sh
+      - name: Codecov
+        uses: codecov/codecov-action@v2.1.0
+        with:
+          fail_ci_if_error: true
+          files: ./coverage.xml
+             
+

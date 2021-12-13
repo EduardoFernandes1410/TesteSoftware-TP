@@ -24,7 +24,6 @@ class TestCashierModeController(TestCase):
 
     
     def test_remove_item_from_sale(self):
-        print('+++++++++++++++++++++++')
         self.input_man.adding_product_data.return_value = 'test-item', 10
         self.input_man.open_sale_options.side_effect = ['add_product', 'remove_product', 'exit']
         self.input_man.remove_product_data.return_value = 'test-item'

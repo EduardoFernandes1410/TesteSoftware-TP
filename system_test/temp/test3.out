@@ -1,0 +1,143 @@
+=======================
+Welcome
+
+1 - Cashier mode
+2 - Manager mode
+3 - Report mode
+4 - Exit
+=======================
+Choice: =======================
+Manager mode
+
+1 - Register product
+2 - Update price
+3 - Remove product
+4 - Update inventory
+5 - Check Inventory
+6 - Exit
+=======================
+Choice: Item name / quantity / price: =======================
+Manager mode
+
+1 - Register product
+2 - Update price
+3 - Remove product
+4 - Update inventory
+5 - Check Inventory
+6 - Exit
+=======================
+Choice: Item name / quantity / price: =======================
+Manager mode
+
+1 - Register product
+2 - Update price
+3 - Remove product
+4 - Update inventory
+5 - Check Inventory
+6 - Exit
+=======================
+Choice: Exiting...
+=======================
+Welcome
+
+1 - Cashier mode
+2 - Manager mode
+3 - Report mode
+4 - Exit
+=======================
+Choice: =======================
+Cashier mode
+
+1 - Init sale
+2 - Exit
+=======================
+Choice: =======================
+SALE
+
+1 - Add product
+2 - Remove product
+3 - Finish sale
+4 - Exit
+=======================
+Choice: Product name and quantity: =======================
+SALE
+
+Batata :  7
+
+1 - Add product
+2 - Remove product
+3 - Finish sale
+4 - Exit
+=======================
+Choice: Product name and quantity: =======================
+SALE
+
+Batata :  7
+Cenoura :  5
+
+1 - Add product
+2 - Remove product
+3 - Finish sale
+4 - Exit
+=======================
+Choice: Total: R$ 85.80
+
+(1) Ok | (2) Not ok
+Choice: =======================
+SALE
+
+1 - Add product
+2 - Remove product
+3 - Finish sale
+4 - Exit
+=======================
+Choice: =======================
+Cashier mode
+
+1 - Init sale
+2 - Exit
+=======================
+Choice: Exiting...
+=======================
+Welcome
+
+1 - Cashier mode
+2 - Manager mode
+3 - Report mode
+4 - Exit
+=======================
+Choice: =======================
+Report mode
+
+1 - Sales on period
+2 - Most sold items
+3 - Revenue contributors
+4 - Days with highest number of items sold
+5 - Days with lowest number of items sold
+6 - Exit
+=======================
+Choice: | name    |   quantity |
+|:--------|-----------:|
+| Batata  |          7 |
+| Cenoura |          5 |
+Press any key to continue...
+=======================
+Report mode
+
+1 - Sales on period
+2 - Most sold items
+3 - Revenue contributors
+4 - Days with highest number of items sold
+5 - Days with lowest number of items sold
+6 - Exit
+=======================
+Choice: Exiting...
+=======================
+Welcome
+
+1 - Cashier mode
+2 - Manager mode
+3 - Report mode
+4 - Exit
+=======================
+Choice: Exiting...

@@ -41,7 +41,7 @@ class DatabaseController:
     def check_product_existence(self, name):
         return DatabaseController.check_product_existence_aux(name, self._products)
 
-
+    @staticmethod
     def get_product_quantity_aux(name, table):
         if(not DatabaseController.check_product_existence_aux(name, table)):
             raise Exception("Item not found")
@@ -142,6 +142,7 @@ class DatabaseController:
     def save_database(self):
         self._products.to_pickle(os.path.join(self._database_path, "products.pkl"))
         self._sales.to_pickle(os.path.join(self._database_path, "sales.pkl"))
+
 
     def remove_product(self, name):
         self._products = self._products[self._products["name"] != name]
