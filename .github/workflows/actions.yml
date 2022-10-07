@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - development
+      - property_based_test
       - main
 
 jobs:
