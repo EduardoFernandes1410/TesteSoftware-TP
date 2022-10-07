@@ -8,7 +8,7 @@ Software Test TP - DCC - UFMG
 - Arthur de Brito Bonifacio - 2019006370
 
 ## System Explanation
-In this work, we developed a command-line trade management system. This system has 3 operating modes available: cashier mode, manager mode and report mode. Each of them will be detailed below:
+In this work, we developed a command-line trade management system. This system has 3 operating modes availaible: cashier mode, manager mode and report mode. Each of them will be detailed below:
 
 ### Cashier Mode
 In this operating mode, the system user can open a new purchase and then add the products being purchased together with their quantities, remove added products, close the purchase, validating it in the system (checking if the added quantities are available in the inventory) and then record the purchase in the system, updating the quantities in the inventory and storing the purchase in the database.
