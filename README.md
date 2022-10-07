@@ -1,27 +1,27 @@
 # TesteSoftware-TP
-TP de Teste de Software - DCC - UFMG
+Software Test TP - DCC - UFMG
 
-## Membros do Grupo
+## Group members
 - Augusto Maillo Queiroga de Figueiredo - 2019006450
-- Eduardo Augusto Militão Fernandes - 2019006540
+- Eduardo Augusto Militao Fernandes - 2019006540
 - Pedro Dias Pires - 2019007040
-- Arthur de Brito Bonifácio - 2019006370
+- Arthur de Brito Bonifacio - 2019006370
 
-## Explicação do Sistema
-Neste trabalho, desenvolvemos um sistema de gerenciamento de comércio por linha de comando. Este sistema possui 3 modos de operação disponíveis: modo caixa, modo gerente e modo de relatório. Cada um deles será detalhado a seguir:
+## System Explanation
+In this work, we developed a command-line trade management system. This system has 3 operating modes available: cashier mode, manager mode and report mode. Each of them will be detailed below:
 
-### Modo Caixa
-Neste modo de operação, o usuário do sistema pode abrir uma nova compra e, então, adicionar os produtos sendo comprados junto de suas quantidades, remover produtos adicionados, fechar a compra, validando-a no sistema (verificando se as quantidades adicionadas estão disponíveis no inventório) e, então, registrar a compra no sistema, atualizando as quantidades no inventório e armazenando a compra no banco de dados.
+### Cashier Mode
+In this operating mode, the system user can open a new purchase and then add the products being purchased together with their quantities, remove added products, close the purchase, validating it in the system (checking if the added quantities are available in the inventory) and then record the purchase in the system, updating the quantities in the inventory and storing the purchase in the database.
 
-### Modo Gerente
-No modo gerente, o usuário tem a capacidade de cadastrar produtos novos no inventório do comércio, informando o nome, preço e quantidade disponível do produto, atualizar o preço de algum produto, remover um produto do sistema e alterar o estoque de um produto, informando tanto uma quantidade positiva (recarregamento de estoque) quanto negativa (perda de estoque) de variação.
+### Manager Mode
+In manager mode, the user has the ability to register new products in the trade inventory, informing the name, price and available quantity of the product, update the price of a product, remove a product from the system and change the stock of a product, informing both a positive (stock replenishment) and negative (stock loss) amount of variation.
 
-### Modo Relatório
-Neste modo, o usuário pode gerar diversos relatórios sobre todos os dados do sistema, a fim de consultar informações sobre o seu uso e de seus clientes. Alguns dos relatórios disponíveis para serem gerados são: exibir todas as comprar realizadas em determinado período, exibir os itens mais vendidos, exibir os itens mais lucrativos, exibir os dias com mais volume de vendas, etc.
+### Report Mode
+In this mode, the user can generate different reports on all the data in the system, in order to consult information about its use and that of its customers. Some of the reports available to be generated are: displaying all purchases made in a given period, displaying the best-selling items, displaying the most profitable items, displaying the days with the most sales volume, etc.
 
-## Tecnologias Utilizadas
-- Linguagem de programação: Python3
-- Framework de teste: unittest
-- Ferramenta de mock: MagicMock - este framework é utilizado para gerar "mocks" das classes do sistema, a fim de facilitar a criação de testes de unidade. Dessa forma, é possível garantir de todos os testes não terão dependências externas e são determinísticos.
-- Banco de dados: Pandas - todas as informações do sistema ficam armazenadas em dois Panda DataFrames, que ficam salvos em arquivos "pickle" na máquina do usuário. Ao iniciar o programa, estes arquivos são lidos e os DataFrames reconstruídos. Ao encerrá-lo, os arquivos são atualizados com as novas informações dos DataFrames.
-- Automatização dos testes: GitHub Actions - ao realizar cada "commit" no GitHub, uma nova "build" é construída e todos os testes do sistema são executados automaticamente. Dessa forma, caso o "commit" leve a uma regressão no sistema, a "build" irá falhar e o desenvolvedor será avisado, impedindo que "bugs" cheguem ao usuário final.
+## Technologies Used
+- Programming language: Python3
+- Test framework: unittest
+- Mock tool: MagicMock - this framework is used to generate "mocks" of system classes, in order to facilitate the creation of unit tests. In this way, it is possible to guarantee that all tests will have no external dependencies and are deterministic.
+- Database: Pandas - all system information is stored in two Panda DataFrames, which are saved in "pickle" files on the user's machine. When starting the program, these files are read and the DataFrames are reconstructed. When you close it, the files are updated with the new information from the DataFrames.
+- Test automation: GitHub Actions - when performing each "commit" on GitHub, a new "build" is built and all system tests are executed automatically. That way, if the "commit" leads to a regression in the system, the "build" will fail and the developer will be warned, preventing "bugs" from reaching the end user.
